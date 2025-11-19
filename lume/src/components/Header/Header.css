@@ -1,0 +1,77 @@
+@import url("https://api.fontshare.com/v2/css?f[]=excon@300,400,500,700,900&display=swap" );
+
+.header-section {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  padding: 0 50px;
+  height: 70px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+}
+.logo{
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.logo h2 {
+  font-family: 'Excon', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: #1e1e1e;
+  margin: 0;
+  padding: 0;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+}
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  width: 300px;
+  box-sizing:border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #1e1e1e;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #646464;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+} 
+
+button:hover {
+  background-color: #4e4e4e;
+}
+
+.add-icon-btn {
+  background: #ffffff;
+  color: #161616;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.add-icon-btn:hover {
+  background: #33333300;
+  color: #363636;
+}
