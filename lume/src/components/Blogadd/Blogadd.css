@@ -1,14 +1,17 @@
+
 .blog-add-container {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
+  font-family: poppins, sans-serif;
+
 }
 
 .input-box {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .textarea-box {
@@ -16,7 +19,8 @@
   height: 100px;
   padding: 12px;
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: poppins, sans-serif;
 }
 
 .label {
@@ -37,7 +41,12 @@
   margin-bottom: 15px;
 }
 
-.toolbar button,
+
+.toolbar button{
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
 .upload-btn {
   padding: 8px 14px;
   font-size: 14px;

@@ -16,6 +16,7 @@ import os
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-created_at')
     serializer_class = PostSerializer
+    lookup_field = 'slug'
 
     # Optional: update content only (for editor autosave)
     @action(detail=True, methods=['patch'])
@@ -53,4 +54,4 @@ class UploadVideoView(APIView):
         path = default_storage.save(save_path, ContentFile(file_obj.read()))
         url = settings.MEDIA_URL + path
         full_url = request.build_absolute_uri(url)
-        return Response({'url': full_url}, status=status.HTTP_201_CREATED)
+        return Response({'url': full_url}, status=status.HTTP_201_CREATED)w

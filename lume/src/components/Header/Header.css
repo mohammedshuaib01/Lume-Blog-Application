@@ -16,6 +16,11 @@
   align-items: center;
   margin: 0;
 }
+
+.logo-link{
+  text-decoration: none;
+}
+
 .logo h2 {
   font-family: 'Excon', sans-serif;
   font-weight: 600;

@@ -8,7 +8,9 @@ function Header() {
   return (
     <div className='header-section'>
       <div className='logo'>
-        <h2>Lume.</h2>
+
+        <Link to={'/'} className='logo-link'><h2>Lume.</h2></Link>
+        
       </div>
 
 

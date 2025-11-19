@@ -13,11 +13,16 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.blog-detail-image {
+.blog-content img {
+  max-width: 100%;
   width: 100%;
-  /* border-radius: 8px; */
+  height: auto;
+  display: block;
+  margin: 20px 0;
+  border-radius: 10px; /* optional */
   object-fit: cover;
 }
+
 
 .blog-title {
   font-size: 2rem;
@@ -49,4 +54,28 @@
   text-decoration: none;
   color: #0077ff;
   font-weight: 500;
+}
+
+.preload {
+  font-size: 1.5rem;
+  color: #555;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.blog-content video {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.blog-image-wrapper {
+  width: 100%;
+  max-width: 100%x;          
+  margin: 0 auto;          
+  overflow: hidden;          
+  border-radius: 12px;  
+       
 }

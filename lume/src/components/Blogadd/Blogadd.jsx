@@ -4,8 +4,8 @@ import "./Blogadd.css";
 // TIPTAP imports
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
+import Image from "@tiptap/extension-image";
 
 function Blogadd() {
   const [title, setTitle] = useState("");
@@ -22,6 +22,7 @@ function Blogadd() {
     ],
     content: "",
   });
+
 
   // Upload image into content
   const handleInsertImage = async (e) => {
@@ -65,33 +66,40 @@ function Blogadd() {
 
   // Submit entire post
   const handleSubmit = async () => {
-    if (!title) return alert("Title required!");
-    if (!editor) return;
+  if (!title) return alert("Title required!");
+  if (!editor) return;
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("excerpt", excerpt);
-    formData.append("content_html", editor.getHTML());
-    formData.append("content_json", JSON.stringify(editor.getJSON()));
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("excerpt", excerpt);
 
-    if (coverImage) {
-      formData.append("cover_image", coverImage);
-    }
+  // only send JSON field, Django supports this
+  formData.append(
+    "content_json",
+    JSON.stringify(editor.getJSON() || {})
+  );
 
-    const res = await fetch("http://localhost:8000/api/posts/", {
-      method: "POST",
-      body: formData,
-    });
+  if (coverImage) {
+    formData.append("cover_image", coverImage);
+  }
 
-    if (res.ok) {
-      alert("Blog Posted Successfully!");
-      setTitle("");
-      setExcerpt("");
-      editor.commands.clearContent();
-    } else {
-      alert("Error uploading blog");
-    }
-  };
+  const res = await fetch("http://localhost:8000/api/posts/", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (res.ok) {
+    alert("Blog Posted Successfully!");
+    setTitle("");
+    setExcerpt("");
+    editor.commands.clearContent();
+  } else {
+    const err = await res.text();
+    console.log("Error:", err);
+    alert("Error uploading blog");
+  }
+};
+
 
   return (
     <div className="blog-add-container">
@@ -130,13 +138,13 @@ function Blogadd() {
       {/* Editor Toolbar */}
       <div className="toolbar">
         <button onClick={() => editor.chain().focus().toggleBold().run()}>
-          Bold
+          <b>Bold</b>
         </button>
         <button onClick={() => editor.chain().focus().toggleItalic().run()}>
-          Italic
+          <i>Italic</i>
         </button>
         <button onClick={() => editor.chain().focus().toggleUnderline().run()}>
-          Underline
+          <u>Underline</u>
         </button>
 
         <label className="upload-btn">
