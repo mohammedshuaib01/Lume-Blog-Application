@@ -27,14 +27,3 @@ export const fetchBlogById = async (id) => {
     }
 };
 
-// Create a new blog
-// export const createBlog = async (blogData) => {
-//     try {
-//         const response = await axios.post(`${API_BASE_URL}blogs/`, blogData);
-//         return response.data;
-//     }
-//     catch (error) {
-//         console.error('Error creating blog:', error);
-//         return null;
-//     }
-// };   

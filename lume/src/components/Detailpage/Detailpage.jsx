@@ -6,6 +6,7 @@ import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
+import Video from "../../tiptap/Video";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -22,7 +23,9 @@ const BlogDetail = () => {
           StarterKit,
           Underline,
           Image,
+          Video,
         ]);
+        //  console.log(html);
 
         setHtmlContent(html);
       }
@@ -37,22 +40,24 @@ const BlogDetail = () => {
 
   const backendURL = "http://localhost:8000/";
 
-  const fixImagePaths = (html) => {
+  const fixMediaPaths = (html) => {
     return html
+      // Fix double-quote image & video src
       .replace(/src="\/media\//g, `src="${backendURL}media/`)
-      .replace(/src="media\//g, `src="${backendURL}media/`);
+      .replace(/src="media\//g, `src="${backendURL}media/`)
+      // Fix single-quote image & video src
+      .replace(/src='\/media\//g, `src='${backendURL}media/`)
+      .replace(/src='media\//g, `src='${backendURL}media/`)
+      // Fix <source> tags inside videos
+      .replace(/<source\s+src="\/media\//g, `<source src="${backendURL}media/`)
+      .replace(/<source\s+src='\/media\//g, `<source src='${backendURL}media/`);
   };
+
 
   return (
     <section className="blog-detail-section">
       <div className="blog-detail-container">
-        <div className="blog-image-wrapper">
-          <img
-            src={blog.thumbnail}
-            alt={blog.title}
-            className="blog-detail-image"
-          />
-        </div>
+        
 
         <div className="blog-header">
           <h1 className="blog-title">{blog.title}</h1>
@@ -61,11 +66,19 @@ const BlogDetail = () => {
           </div>
         </div>
 
+        <div className="blog-image-wrapper">
+          <img
+            src={blog.thumbnail}
+            alt={blog.title}
+            className="blog-detail-image"
+          />
+        </div>
+
         {/* Render HTML from Tiptap JSON */}
         <div
           className="blog-content"
           dangerouslySetInnerHTML={{
-            __html: fixImagePaths(htmlContent),
+            __html: fixMediaPaths(htmlContent),
           }}
         ></div>
 
@@ -79,4 +92,6 @@ const BlogDetail = () => {
   );
 };
 
+
 export default BlogDetail;
+

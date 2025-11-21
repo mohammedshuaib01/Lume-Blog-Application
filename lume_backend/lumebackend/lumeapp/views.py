@@ -54,4 +54,4 @@ class UploadVideoView(APIView):
         path = default_storage.save(save_path, ContentFile(file_obj.read()))
         url = settings.MEDIA_URL + path
         full_url = request.build_absolute_uri(url)
-        return Response({'url': full_url}, status=status.HTTP_201_CREATED)w
+        return Response({'url': full_url}, status=status.HTTP_201_CREATED)

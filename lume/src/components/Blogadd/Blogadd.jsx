@@ -6,6 +6,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
+import Video from "../../tiptap/Video";
 
 function Blogadd() {
   const [title, setTitle] = useState("");
@@ -19,6 +20,7 @@ function Blogadd() {
       StarterKit,
       Underline,
       Image,
+      Video,
     ],
     content: "",
   });

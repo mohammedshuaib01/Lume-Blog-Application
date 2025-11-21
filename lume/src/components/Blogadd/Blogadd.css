@@ -63,6 +63,7 @@
   border-radius: 8px;
   background: white;
   margin-bottom: 20px;
+  
 }
 
 .publish-btn {
@@ -73,4 +74,11 @@
   font-size: 18px;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.editor-box img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0;
 }
