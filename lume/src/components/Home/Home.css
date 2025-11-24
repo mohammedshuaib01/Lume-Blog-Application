@@ -63,3 +63,22 @@
     font-size: 16px;
 
 }
+
+.author-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-details p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.blog-content img{
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+}

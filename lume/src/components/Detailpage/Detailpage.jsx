@@ -9,13 +9,13 @@ import Image from "@tiptap/extension-image";
 import Video from "../../tiptap/Video";
 
 const BlogDetail = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [blog, setBlog] = useState(null);
   const [htmlContent, setHtmlContent] = useState("");
 
   useEffect(() => {
     const fetchBlog = async () => {
-      const data = await fetchBlogById(id);
+      const data = await fetchBlogById(slug);
       setBlog(data);
 
       if (data.content_json) {
@@ -25,14 +25,14 @@ const BlogDetail = () => {
           Image,
           Video,
         ]);
-        //  console.log(html);
+         console.log(html);
 
         setHtmlContent(html);
       }
     };
 
     fetchBlog();
-  }, [id]);
+  }, [slug]);
 
   if (!blog) {
     return <div className="preload">Loading...</div>;
@@ -52,7 +52,14 @@ const BlogDetail = () => {
       .replace(/<source\s+src="\/media\//g, `<source src="${backendURL}media/`)
       .replace(/<source\s+src='\/media\//g, `<source src='${backendURL}media/`);
   };
-
+  
+const formattedDate = new Date(blog.created_at).toLocaleString("en-US", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+});
 
   return (
     <section className="blog-detail-section">
@@ -62,7 +69,8 @@ const BlogDetail = () => {
         <div className="blog-header">
           <h1 className="blog-title">{blog.title}</h1>
           <div className="blog-meta">
-            <span>{blog.created_at}</span>
+            
+            <span>{blog.formattedDate}</span>
           </div>
         </div>
 

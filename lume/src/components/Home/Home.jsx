@@ -34,6 +34,13 @@ function Home() {
                         >
                             <div className='blog-card'>
                                 <div className='blog-content'>
+
+                                    <div className='author-details'>
+                                        <div><img src="/author.jpg" alt="" /></div>
+                                        <p>Mohammed Shuaib</p>
+                                        <span>{blog.created_at}</span>
+                                    </div>
+
                                     <h2>{title}</h2>
                                     <p>{shortExcerpt}...</p>
                                 </div>

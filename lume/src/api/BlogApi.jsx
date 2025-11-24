@@ -16,9 +16,9 @@ export const getBlogs = async () => {
 
 
 // Fetch single blog using id 
-export const fetchBlogById = async (id) => {
+export const fetchBlogById = async (slug) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}posts/${id}/`);
+        const response = await axios.get(`${API_BASE_URL}posts/${slug}/`);
         return response.data;
     }
     catch (error) {
@@ -27,3 +27,20 @@ export const fetchBlogById = async (id) => {
     }
 };
 
+
+// Update api for blog using slug
+export const updateBlogBySlug = async (slug, updatedData) => {
+    try {
+        const response = await axios.patch(
+            `${API_BASE_URL}posts/${slug}/`,
+            updatedData,
+            {
+                headers: { "Content-Type": "application/json" },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error updating blog:", error);
+        return null;
+    }
+};

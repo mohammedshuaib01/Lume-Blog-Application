@@ -1,9 +1,13 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
 import Header from './components/Header/Header'
 import Home from './components/Home/Home'
 import Detailpage from './components/Detailpage/Detailpage'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Blogadd from './components/BlogAdd/Blogadd'
+import Blogadd from './components/Blogadd/Blogadd'
+import Blogedit from './components/Blodedit/Blogedit'
+
+
 function App() {
   return (
     
@@ -12,9 +16,10 @@ function App() {
       <Routes>
 
         <Route path='/' element={<Home />} />
-        <Route path='/blog/:id' element={<Detailpage />} />
+        <Route path='/blog/:slug' element={<Detailpage />} />
         <Route path="/add-blog" element={<Blogadd />} />
-        <Route path="/add-blog/:id" element={<Blogadd />} />
+        <Route path="/edit-blog/:slug" element={<Blogedit />} />
+
 
         
       </Routes>
