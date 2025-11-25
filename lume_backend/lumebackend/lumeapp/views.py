@@ -22,11 +22,11 @@ class PostViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['patch'])
     def content(self, request, pk=None):
         post = self.get_object()
-        post.content_html = request.data.get('content_html', post.content_html)
+        # post.content_html = request.data.get('content_html', post.content_html)
         post.content_json = request.data.get('content_json', post.content_json)
         post.save()
         return Response(PostSerializer(post).data)
-
+    
 # ----------------- File upload endpoints -----------------
 class UploadImageView(APIView):
     parser_classes = [MultiPartParser, FormParser]

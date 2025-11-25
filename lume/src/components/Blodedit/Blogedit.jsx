@@ -11,15 +11,17 @@ import Image from "@tiptap/extension-image";
 import Video from "../../tiptap/Video";
 
 function Blogedit() {
-  const { slug } = useParams();
+  const { slug } = useParams(); // <-- correct slug from URL
 
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [coverImage, setCoverImage] = useState(null);
   const [preview, setPreview] = useState(null);
   const [oldImage, setOldImage] = useState("");
+  const [slugType, setSlugType] = useState("auto");
+  const [manualSlug, setManualSlug] = useState(""); // <-- rename to avoid conflict
 
-  // TIPTAP EDITOR
+  // TIPTAP init
   const editor = useEditor({
     extensions: [StarterKit, Underline, Image, Video],
     content: "",
@@ -35,12 +37,16 @@ function Blogedit() {
         setTitle(data.title);
         setExcerpt(data.excerpt);
         setOldImage(data.cover_image);
+        setManualSlug(data.slug);
 
-        // Load editor content
+        // Load editor content safely
         if (editor && data.content_json) {
-          editor.commands.setContent(data.content_json);
+          editor.commands.setContent(
+            typeof data.content_json === "string"
+              ? JSON.parse(data.content_json)
+              : data.content_json
+          );
         }
-
       } catch (err) {
         console.log("Fetch error:", err);
       }
@@ -83,7 +89,9 @@ function Blogedit() {
     const data = await res.json();
 
     if (data.url) {
-      editor.commands.setVideo(data.url);
+      editor.commands.insertContent(
+        `<video controls width="100%"><source src="${data.url}" type="video/mp4"></video>`
+      );
     }
   };
 
@@ -95,6 +103,13 @@ function Blogedit() {
     formData.append("title", title);
     formData.append("excerpt", excerpt);
     formData.append("content_json", JSON.stringify(editor.getJSON()));
+    formData.append("slug_type", slugType);
+
+    if (slugType === "manual") {
+      formData.append("slug", manualSlug);
+    } else {
+      formData.append("slug", slug); // use the old slug for patch
+    }
 
     if (coverImage) {
       formData.append("cover_image", coverImage);
@@ -136,6 +151,28 @@ function Blogedit() {
         onChange={(e) => setExcerpt(e.target.value)}
       ></textarea>
 
+      {/* Slug Type */}
+      <label className="label">Slug Type</label>
+      <select
+        className="input-box"
+        value={slugType}
+        onChange={(e) => setSlugType(e.target.value)}
+      >
+        <option value="auto">Auto Generate</option>
+        <option value="manual">Manual</option>
+      </select>
+
+      {/* Manual Slug */}
+      {slugType === "manual" && (
+        <input
+          type="text"
+          className="input-box"
+          placeholder="Enter custom slug"
+          value={manualSlug}
+          onChange={(e) => setManualSlug(e.target.value)}
+        />
+      )}
+
       {/* Cover Image */}
       <label className="label">Change Cover Image</label>
       <input
@@ -153,7 +190,7 @@ function Blogedit() {
         <img src={oldImage} alt="" className="cover-preview" />
       ) : null}
 
-      {/* Editor Toolbar */}
+      {/* Toolbar */}
       <div className="toolbar">
         <button onClick={() => editor.chain().focus().toggleBold().run()}>
           <b>Bold</b>
@@ -176,12 +213,12 @@ function Blogedit() {
         </label>
       </div>
 
-      {/* TIPTAP Editor */}
+      {/* Editor */}
       <div className="editor-box">
         <EditorContent editor={editor} />
       </div>
 
-      {/* Update Button */}
+      {/* Update button */}
       <button className="publish-btn" onClick={handleUpdate}>
         Update Blog
       </button>

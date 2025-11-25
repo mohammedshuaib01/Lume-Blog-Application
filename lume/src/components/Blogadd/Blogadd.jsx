@@ -13,6 +13,8 @@ function Blogadd() {
   const [excerpt, setExcerpt] = useState("");
   const [coverImage, setCoverImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [slugType, setSlugType] = useState("auto");
+  const [slug, setSlug] = useState("");
 
   // TIPTAP EDITOR SETUP
   const editor = useEditor({
@@ -68,39 +70,48 @@ function Blogadd() {
 
   // Submit entire post
   const handleSubmit = async () => {
-  if (!title) return alert("Title required!");
-  if (!editor) return;
+    if (!title) return alert("Title required!");
+    if (!editor) return;
 
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("excerpt", excerpt);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("excerpt", excerpt);
 
-  // only send JSON field, Django supports this
-  formData.append(
-    "content_json",
-    JSON.stringify(editor.getJSON() || {})
-  );
+    // slug_type required
+    formData.append("slug_type", slugType); // change to "manual" if needed
 
-  if (coverImage) {
-    formData.append("cover_image", coverImage);
-  }
+    if (slugType === "manual") {
+      formData.append("slug", slug);
+    }
 
-  const res = await fetch("http://localhost:8000/api/posts/", {
-    method: "POST",
-    body: formData,
-  });
+    // only send JSON field, Django supports this
+    formData.append(
+      "content_json",
+      JSON.stringify(editor.getJSON() || {})
+    );
 
-  if (res.ok) {
-    alert("Blog Posted Successfully!");
-    setTitle("");
-    setExcerpt("");
-    editor.commands.clearContent();
-  } else {
-    const err = await res.text();
-    console.log("Error:", err);
-    alert("Error uploading blog");
-  }
-};
+    if (coverImage) {
+      formData.append("cover_image", coverImage);
+    }
+
+    const res = await fetch("http://localhost:8000/api/posts/", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      alert("Blog Posted Successfully!");
+      setTitle("");
+      setExcerpt("");
+      setSlug("");
+      setSlugType("auto");
+      editor.commands.clearContent();
+    } else {
+      const err = await res.text();
+      console.log("Error:", err);
+      alert("Error uploading blog");
+    }
+  };
 
 
   return (
@@ -124,6 +135,30 @@ function Blogadd() {
         value={excerpt}
         onChange={(e) => setExcerpt(e.target.value)}
       ></textarea>
+
+
+      {/* Slug Type */}
+      <label className="label">Slug Type</label>
+      <select
+        className="input-box"
+        value={slugType}
+        onChange={(e) => setSlugType(e.target.value)}
+      >
+        <option value="auto">Auto Generate</option>
+        <option value="manual">Manual</option>
+      </select>
+
+      {/* Manual Slug Input (show only if manual) */}
+      {slugType === "manual" && (
+        <input
+          type="text"
+          className="input-box"
+          placeholder="Enter custom slug"
+          value={slug}
+          onChange={(e) => setSlug(e.target.value)}
+        />
+      )}
+
 
       {/* Cover Image */}
       <label className="label">Cover Image</label>
