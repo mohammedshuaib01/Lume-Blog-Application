@@ -44,3 +44,15 @@ export const updateBlogBySlug = async (slug, updatedData) => {
         return null;
     }
 };
+
+// Delete api for blog using slug 
+export const deleteBlogBySlug = async (slug) => {
+    try{
+        const response = await axios.delete(`${API_BASE_URL}posts/${slug}/`)
+        return response.data;
+    }
+    catch(error){
+        console.error('Error deleting blog:', error);
+        return null;    
+    }
+};

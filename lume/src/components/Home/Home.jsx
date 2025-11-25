@@ -14,6 +14,7 @@ function Home() {
         fetchData();
     }, [])
 
+
     return (
         <div className='home-section'>
             <div className='home-container'>
@@ -25,6 +26,13 @@ function Home() {
                         .split(" ")
                         .slice(0, 35)
                         .join(" ");
+
+                    const formattedDate = new Date(blog.created_at).toLocaleString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+
+                    });
 
                     return (
                         <Link
@@ -38,7 +46,7 @@ function Home() {
                                     <div className='author-details'>
                                         <div><img src="/author.jpg" alt="" /></div>
                                         <p>Mohammed Shuaib</p>
-                                        <span>{blog.created_at}</span>
+                                        <span className="date-italic">{formattedDate}</span>
                                     </div>
 
                                     <h2>{title}</h2>

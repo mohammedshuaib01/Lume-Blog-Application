@@ -55,3 +55,5 @@ class UploadVideoView(APIView):
         url = settings.MEDIA_URL + path
         full_url = request.build_absolute_uri(url)
         return Response({'url': full_url}, status=status.HTTP_201_CREATED)
+    
+

@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import Detailpage from './components/Detailpage/Detailpage'
 import Blogadd from './components/Blogadd/Blogadd'
 import Blogedit from './components/Blodedit/Blogedit'
+import Footer from './components/Footer/Footer'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
         
       </Routes>
+      <Footer/>
     </Router>
 
   )
