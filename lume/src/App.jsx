@@ -20,8 +20,6 @@ function App() {
         <Route path='/blog/:slug' element={<Detailpage />} />
         <Route path="/add-blog" element={<Blogadd />} />
         <Route path="/edit-blog/:slug" element={<Blogedit />} />
-
-
         
       </Routes>
       <Footer/>
