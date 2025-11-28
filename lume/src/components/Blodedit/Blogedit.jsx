@@ -130,6 +130,14 @@ function Blogedit() {
     }
   };
 
+
+  //  PROTECT THE PAGE
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    return <h2>You are not authorized</h2>;
+  }
+
   return (
     <div className="blog-add-container">
       <h1>Edit Blog</h1>

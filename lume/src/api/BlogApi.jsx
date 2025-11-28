@@ -7,7 +7,7 @@ export const getBlogs = async () => {
     try {
         const response = await axios.get(`${API_BASE_URL}posts/`);
         return response.data;
-    } 
+    }
     catch (error) {
         console.error('Error fetching blogs:', error);
         return [];
@@ -30,12 +30,17 @@ export const fetchBlogById = async (slug) => {
 
 // Update api for blog using slug
 export const updateBlogBySlug = async (slug, updatedData) => {
+    const token = localStorage.getItem("adminToken");
     try {
         const response = await axios.patch(
             `${API_BASE_URL}posts/${slug}/`,
             updatedData,
             {
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+
             }
         );
         return response.data;
@@ -46,13 +51,19 @@ export const updateBlogBySlug = async (slug, updatedData) => {
 };
 
 // Delete api for blog using slug 
+// BlogApi.jsx
 export const deleteBlogBySlug = async (slug) => {
-    try{
-        const response = await axios.delete(`${API_BASE_URL}posts/${slug}/`)
-        return response.data;
-    }
-    catch(error){
-        console.error('Error deleting blog:', error);
-        return null;    
-    }
+  const token = localStorage.getItem("adminToken");
+  try {
+    const response = await axios.delete(`${API_BASE_URL}posts/${slug}/`,
+      {
+        headers: { "Authorization": `Bearer ${token}` }
+      }
+    )
+    return response.data;
+  }
+  catch (error) {
+    console.error('Error deleting blog:', error);
+    return null;
+  }
 };

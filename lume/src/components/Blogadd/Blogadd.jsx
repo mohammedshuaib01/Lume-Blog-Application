@@ -38,6 +38,9 @@ function Blogadd() {
 
     const res = await fetch("http://localhost:8000/api/upload/image/", {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("adminToken")}`,
+      },
       body: formData,
     });
 
@@ -57,6 +60,9 @@ function Blogadd() {
 
     const res = await fetch("http://localhost:8000/api/upload/video/", {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("adminToken")}`,
+      },
       body: formData,
     });
 
@@ -96,6 +102,9 @@ function Blogadd() {
 
     const res = await fetch("http://localhost:8000/api/posts/", {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("adminToken")}`
+      },
       body: formData,
     });
 
@@ -112,6 +121,17 @@ function Blogadd() {
       alert("Error uploading blog");
     }
   };
+
+
+
+
+  //  PROTECT THE PAGE
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    return <h2>You are not authorized</h2>;
+  }
+
 
 
   return (

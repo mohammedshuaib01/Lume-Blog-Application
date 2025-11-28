@@ -22,7 +22,7 @@ const BlogDetail = () => {
       if (data.content_json) {
         const html = generateHTML(data.content_json, [
           StarterKit,
-          Underline,
+          // Underline,
           Image,
           Video,
         ]);
@@ -62,19 +62,18 @@ const BlogDetail = () => {
     minute: "2-digit",
   });
 
-  const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete this blog?")) return;
+ const handleDelete = async () => {
+  if (!window.confirm("Are you sure you want to delete this blog?")) return;
 
+  const result = await deleteBlogBySlug(slug);
 
-    const result = await deleteBlogBySlug(slug);
-
-    if (result !== null) {
-      alert("Blog deleted successfully!");
-      window.location.href = "/";
-    } else {
-      alert("Failed to delete blog.");
-    }
-  };
+  if (result !== null) {
+    alert("Blog deleted successfully!");
+    window.location.href = "/";
+  } else {
+    alert("Failed to delete blog.");
+  }
+};
 
 
   return (
