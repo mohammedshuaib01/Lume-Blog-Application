@@ -44,7 +44,7 @@ function Home() {
                                 <div className='blog-content'>
 
                                     <div className='author-details'>
-                                        <div><img src="/author.jpg" alt="" /></div>
+                                        <div><img src="/avatar.webp" alt="" /></div>
                                         <p>Mohammed Shuaib</p>
                                         <span className="date-italic">{formattedDate}</span>
                                     </div>

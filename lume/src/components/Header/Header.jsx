@@ -8,10 +8,10 @@ function Header() {
   const [query, setQuery] = useState("");
   const [allBlogs, setAllBlogs] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const [showMobileSearch, setShowMobileSearch] = useState(false);
 
   const navigate = useNavigate();
 
-  // Fetch all blogs once
   useEffect(() => {
     const fetchData = async () => {
       const blogs = await getBlogs();
@@ -20,7 +20,6 @@ function Header() {
     fetchData();
   }, []);
 
-  // Handle live suggestions
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
@@ -34,7 +33,6 @@ function Header() {
       blog.title.toLowerCase().includes(value.toLowerCase())
     );
 
-    // Show only first 4 suggestions
     setSuggestions(matched.slice(0, 4));
   };
 
@@ -47,13 +45,19 @@ function Header() {
   return (
     <div className='header-section'>
 
-      <div className='logo'>
-        <Link to="/" className='logo-link'>
-          <h2>Lume.</h2>
-        </Link>
-      </div>
+  {/* Logo */}
+  <div className='logo'>
+    <Link to="/" className='logo-link'>
+      <h2>Lume.</h2>
+    </Link>
+  </div>
 
-      <div className='search-container'>
+  {/* Middle: Search Container */}
+  <div className='search-container'>
+
+    {/* Desktop Search */}
+    <div className="desktop-search">
+      <div className="search-input-wrapper">
         <input
           type="text"
           placeholder='Search...'
@@ -62,13 +66,82 @@ function Header() {
           onChange={handleChange}
         />
 
+        {query.length > 0 && (
+          <span
+            className="clear-btn"
+            onClick={() => {
+              setQuery("");
+              setSuggestions([]);
+            }}
+          >
+            ✕
+          </span>
+        )}
+      </div>
+
+      {suggestions.length > 0 && (
+        <div className="suggestion-box">
+          {suggestions.map(s => (
+            <div
+              key={s.id}
+              className="suggestion-item"
+              onClick={() => handleSelect(s.slug)}
+            >
+              {s.title}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {/* Mobile Search Overlay */}
+    {showMobileSearch && (
+      <div className="mobile-search-wrapper">
+
+        <div className="mobile-search-input-wrapper">
+          <input
+            type="text"
+            autoFocus
+            placeholder="Search..."
+            className="mobile-search-input"
+            value={query}
+            onChange={handleChange}
+          />
+
+          {query.length > 0 && (
+            <span
+              className="mobile-clear-btn"
+              onClick={() => {
+                setQuery("");
+                setSuggestions([]);
+              }}
+            >
+              ✕
+            </span>
+          )}
+        </div>
+
+        <button
+          className="mobile-close-btn"
+          onClick={() => {
+            setShowMobileSearch(false);
+            setQuery("");
+            setSuggestions([]);
+          }}
+        >
+          ✕
+        </button>
+
         {suggestions.length > 0 && (
-          <div className="suggestion-box">
+          <div className="mobile-suggestion-box">
             {suggestions.map(s => (
               <div
                 key={s.id}
                 className="suggestion-item"
-                onClick={() => handleSelect(s.slug)}
+                onClick={() => {
+                  setShowMobileSearch(false);
+                  handleSelect(s.slug);
+                }}
               >
                 {s.title}
               </div>
@@ -76,21 +149,34 @@ function Header() {
           </div>
         )}
       </div>
+    )}
 
+  </div>
 
-      {localStorage.getItem("adminToken") && (
-        <Link to="/admin/dashboard" className="avatar-wrapper">
-          <img
-            src="/author.jpg"
-            alt="Admin"
-            className="avatar-image"
-          />
-        </Link>
-      )}
+  {/* RIGHT SIDE: search icon + avatar */}
+  <div className="right-section">
 
+    {/* Mobile search icon */}
+    <i
+      className="fa-solid fa-magnifying-glass mobile-search-icon"
+      onClick={() => setShowMobileSearch(true)}
+    ></i>
 
+    {/* Avatar */}
+    {localStorage.getItem("adminToken") && (
+      <Link to="/admin/dashboard" className="avatar-wrapper">
+        <img
+          src="/avatar.webp"
+          alt="Admin"
+          className="avatar-image"
+        />
+      </Link>
+    )}
 
-    </div>
+  </div>
+
+</div>
+
   )
 }
 

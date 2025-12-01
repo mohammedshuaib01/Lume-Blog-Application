@@ -82,3 +82,43 @@
   display: block;
   margin: 10px 0;
 }
+
+@media (max-width: 768px) {
+
+  /* Fix overflow from toolbar */
+  .toolbar {
+    flex-wrap: wrap;        /* allow buttons to wrap instead of pushing overflow */
+    gap: 6px;               /* reduce spacing */
+    overflow-x: hidden;     /* prevents accidental overflow */
+    width: 100%;
+  }
+
+  .toolbar button,
+  .upload-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  /* Fix container padding overflow */
+  .blog-add-container {
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  /* Fix preview image width */
+  .cover-preview {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Fix editor horizontal overflow */
+  .editor-box {
+    overflow-x: hidden;
+  }
+
+  .ProseMirror {
+    width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+}
