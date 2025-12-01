@@ -77,9 +77,18 @@ function Header() {
         )}
       </div>
 
-      <Link to="/add-blog" className="add-icon-btn">
-        <FiEdit size={26} />
-      </Link>
+
+      {localStorage.getItem("adminToken") && (
+        <Link to="/admin/dashboard" className="avatar-wrapper">
+          <img
+            src="/author.jpg"
+            alt="Admin"
+            className="avatar-image"
+          />
+        </Link>
+      )}
+
+
 
     </div>
   )

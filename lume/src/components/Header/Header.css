@@ -66,7 +66,7 @@ button:hover {
   background-color: #4e4e4e;
 }
 
-.add-icon-btn {
+/* .add-icon-btn {
   background: #ffffff;
   color: #161616;
   padding: 10px;
@@ -81,7 +81,7 @@ button:hover {
 .add-icon-btn:hover {
   background: #33333300;
   color: #363636;
-}
+} */
 
 .suggestion-box {
   position: absolute;
@@ -105,5 +105,27 @@ button:hover {
 
 .suggestion-item:hover {
   background: #f5f5f5;
+}
+
+.avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.avatar-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;      /* Makes it round */
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  transition: 0.2s;
+}
+
+.avatar-image:hover {
+  border-color: #333;
+  transform: scale(1.05);
 }
  

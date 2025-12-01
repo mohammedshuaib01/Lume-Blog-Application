@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import os
-from .utils.auth import require_admin
+# from .utils.auth import require_admin
 
 
     # ----------------- Post ViewSet -----------------
@@ -21,17 +21,17 @@ class PostViewSet(viewsets.ModelViewSet):
         lookup_field = 'slug'
 
         # ---------- PROTECT CREATE ----------
-        @require_admin
+        # @require_admin
         def create(self, request, *args, **kwargs):
             return super().create(request, *args, **kwargs)
 
         # ---------- PROTECT UPDATE ----------
-        @require_admin
+        # @require_admin
         def update(self, request, *args, **kwargs):
             return super().update(request, *args, **kwargs)
 
         # ---------- PROTECT DELETE ----------
-        @require_admin
+        # @require_admin
         def destroy(self, request, *args, **kwargs):
             return super().destroy(request, *args, **kwargs)
         
@@ -48,7 +48,7 @@ class UploadImageView(APIView):
         parser_classes = [MultiPartParser, FormParser]
         # permission_classes = [AllowAny]
 
-        @require_admin
+        # @require_admin
         def post(self, request, format=None):
             file_obj = request.FILES.get('image') or request.FILES.get('file')
             if not file_obj:
@@ -63,7 +63,7 @@ class UploadVideoView(APIView):
         parser_classes = [MultiPartParser, FormParser]
         permission_classes = []
 
-        @require_admin
+        # @require_admin
         def post(self, request, format=None):
             file_obj = request.FILES.get('video') or request.FILES.get('file')
             if not file_obj:

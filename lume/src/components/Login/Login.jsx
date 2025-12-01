@@ -28,7 +28,7 @@ function Login({ onLogin }) {
     onLogin(data.session.access_token)
 
     // Redirect to admin page after login
-    navigate("/");
+    navigate("/admin/dashboard");
   }
 
 

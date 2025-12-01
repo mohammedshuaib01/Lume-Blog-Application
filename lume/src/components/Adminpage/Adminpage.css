@@ -1,0 +1,58 @@
+/* Wrapper */
+.admin-page-wrapper {
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+  font-family: poppins, sans-serif;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+/* Minimal icon button */
+.minimal-icon {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 6px;
+  transition: 0.2s ease;
+}
+
+.minimal-icon:hover {
+  opacity: 0.6;
+}
+
+/* Blog list */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Blog card */
+.blog-card {
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Blog title */
+.blog-title {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Actions */
+.blog-actions {
+  display: flex;
+  gap: 14px;
+}

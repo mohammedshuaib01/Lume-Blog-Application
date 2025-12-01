@@ -7,6 +7,8 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 import Video from "../../tiptap/Video";
+import { useNavigate } from "react-router-dom";
+
 
 function Blogadd() {
   const [title, setTitle] = useState("");
@@ -15,6 +17,7 @@ function Blogadd() {
   const [preview, setPreview] = useState(null);
   const [slugType, setSlugType] = useState("auto");
   const [slug, setSlug] = useState("");
+  const navigate = useNavigate();
 
   // TIPTAP EDITOR SETUP
   const editor = useEditor({
@@ -110,6 +113,8 @@ function Blogadd() {
 
     if (res.ok) {
       alert("Blog Posted Successfully!");
+      navigate("/admin/dashboard");
+
       setTitle("");
       setExcerpt("");
       setSlug("");

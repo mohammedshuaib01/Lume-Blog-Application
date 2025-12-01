@@ -4,7 +4,7 @@ import "./Detailpage.css";
 import { fetchBlogById } from "../../api/BlogApi";
 import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
+// import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 import Video from "../../tiptap/Video";
 import { deleteBlogBySlug } from "../../api/BlogApi";
@@ -62,18 +62,18 @@ const BlogDetail = () => {
     minute: "2-digit",
   });
 
- const handleDelete = async () => {
-  if (!window.confirm("Are you sure you want to delete this blog?")) return;
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this blog?")) return;
 
-  const result = await deleteBlogBySlug(slug);
+    const result = await deleteBlogBySlug(slug);
 
-  if (result !== null) {
-    alert("Blog deleted successfully!");
-    window.location.href = "/";
-  } else {
-    alert("Failed to delete blog.");
-  }
-};
+    if (result !== null) {
+      alert("Blog deleted successfully!");
+      window.location.href = "/";
+    } else {
+      alert("Failed to delete blog.");
+    }
+  };
 
 
   return (
@@ -113,19 +113,23 @@ const BlogDetail = () => {
           </div>
 
           <div className="button-inner-div">
-           
 
-            <div className="blog-footer">
-              <Link onClick={handleDelete} className="delete-button">
-                Delete
-              </Link>
-            </div>
 
-             <div className="blog-footer">
-              <Link to={`/edit-blog/${slug}`} className="edit-button">
-                Edit
-              </Link>
-            </div>
+            {localStorage.getItem("adminToken") && (
+              <div className="blog-footer">
+                <Link onClick={handleDelete} className="delete-button">
+                  Delete
+                </Link>
+              </div>
+            )}
+
+            {localStorage.getItem("adminToken") && (
+              <div className="blog-footer">
+                <Link to={`/edit-blog/${slug}`} className="edit-button">
+                  Edit
+                </Link>
+              </div>
+            )}
 
 
           </div>
