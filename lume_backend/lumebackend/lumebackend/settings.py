@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a693rcciz=t3kc$comu2@mo=r@^78lx05_6behx5b+#nxb)%j@'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -106,18 +106,17 @@ WSGI_APPLICATION = 'lumebackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  
-        'USER': 'postgres',
+        'NAME': os.environ.get("DB_NAME", "postgres"),
+        'USER': os.environ.get("DB_USER", "postgres"),
         'PASSWORD': os.environ.get("DB_PASSWORD"),
-        # 'PASSWORD': 'u2+q#k7&gj#VaSz',
-        'HOST': 'db.vrlhwezkjjgaxcqarmhq.supabase.co',
-        'PORT': '6543',
-         'OPTIONS': {
+        'HOST': os.environ.get("DB_HOST", "db.vrlhwezkjjgaxcqarmhq.supabase.co"),
+        'PORT': os.environ.get("DB_PORT", "6543"),
+        'OPTIONS': {
             'sslmode': 'require',
         },
-        
     }
 }
+
 
 
 
