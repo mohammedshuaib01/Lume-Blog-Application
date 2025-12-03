@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a693rcciz=t3kc$comu2@mo=r@^78lx05_6behx5b+#nxb)%j@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -86,20 +88,38 @@ WSGI_APPLICATION = 'lumebackend.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  # default supabase db
+#         'USER': 'postgres',
+#         'PASSWORD': 'u2+q#k7&gj#VaSz',
+#         'HOST': 'db.vrlhwezkjjgaxcqarmhq.supabase.co',
+#         'PORT': '5432',
+#          'OPTIONS': {
+#             'sslmode': 'require',
+#         },
+        
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # default supabase db
+        'NAME': 'postgres',  
         'USER': 'postgres',
-        'PASSWORD': 'u2+q#k7&gj#VaSz',
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        # 'PASSWORD': 'u2+q#k7&gj#VaSz',
         'HOST': 'db.vrlhwezkjjgaxcqarmhq.supabase.co',
-        'PORT': '5432',
+        'PORT': '6543',
          'OPTIONS': {
             'sslmode': 'require',
         },
         
     }
 }
+
+
 
 
 # Password validation
@@ -137,6 +157,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
