@@ -39,7 +39,7 @@ function Blogadd() {
     const formData = new FormData();
     formData.append("image", file);
 
-    const res = await fetch("http://localhost:8000/api/upload/image/", {
+    const res = await fetch("https://lume-blog-application-4.onrender.com/api/upload/image/", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("adminToken")}`,
@@ -61,7 +61,7 @@ function Blogadd() {
     const formData = new FormData();
     formData.append("video", file);
 
-    const res = await fetch("http://localhost:8000/api/upload/video/", {
+    const res = await fetch("https://lume-blog-application-4.onrender.com/api/upload/video/", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("adminToken")}`,
@@ -103,7 +103,7 @@ function Blogadd() {
       formData.append("cover_image", coverImage);
     }
 
-    const res = await fetch("http://localhost:8000/api/posts/", {
+    const res = await fetch("https://lume-blog-application-4.onrender.com/api/posts/", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("adminToken")}`

@@ -39,7 +39,7 @@ const BlogDetail = () => {
     return <div className="preload" style={{ minHeight: "60vh" }}>Loading...</div>;
   }
 
-  const backendURL = "http://localhost:8000/";
+  const backendURL = "https://lume-blog-application-4.onrender.com/";
 
   const fixMediaPaths = (html) => {
     return html

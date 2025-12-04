@@ -22,10 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+
+SECRET_KEY = "django-insecure-a693rcciz=t3kc$comu2@mo=r@^78lx05_6behx5b+#nxb)%j@"
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -88,20 +92,20 @@ WSGI_APPLICATION = 'lumebackend.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',  # default supabase db
-#         'USER': 'postgres',
-#         'PASSWORD': 'u2+q#k7&gj#VaSz',
-#         'HOST': 'db.vrlhwezkjjgaxcqarmhq.supabase.co',
-#         'PORT': '5432',
-#          'OPTIONS': {
-#             'sslmode': 'require',
-#         },
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',  # default supabase db
+        'USER': 'postgres',
+        'PASSWORD': 'u2+q#k7&gj#VaSz',
+        'HOST': 'db.vrlhwezkjjgaxcqarmhq.supabase.co',
+        'PORT': '5432',
+         'OPTIONS': {
+            'sslmode': 'require',
+        },
         
-#     }
-# }
+    }
+}
 
 DATABASES = {
     'default': {
